@@ -10,6 +10,10 @@ app.get("/", (req, res) => {
   res.send("API still running, why exactly?");
 });
 
+// Body-Parser-Middleware Init
+
+app.use(express.json({ extended: false }));
+
 //Route Setup
 app.use("/api/auth", require("./routes/api/auth"));
 app.use("/api/posts", require("./routes/api/posts"));
