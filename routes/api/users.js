@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const gravatar = require("gravatar");
 const { check, validationResult } = require("express-validator");
 
 const User = require("../../model/User");
@@ -34,8 +35,7 @@ router.post(
     const { name, email, password } = req.body;
 
     try {
-      // if user exists
-
+      // check if user exists
       let user = await User.findOne({ email });
 
       if (user) {
@@ -44,6 +44,20 @@ router.post(
 
       // get user's gravatar
 
+      const avatar = gravatar.url(email, {
+        s: "200",
+        r: pg,
+        d: "mm",
+      });
+
+      // create new instance of user
+
+      user = new User({
+        name,
+        email,
+        avatar,
+        password,
+      });
       // encrypt password
 
       // return json web token
