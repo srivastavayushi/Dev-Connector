@@ -7,7 +7,7 @@ const config = require("config");
 const jwtToken = config.get("JWT_SECRET_TOKEN");
 const { check, validationResult } = require("express-validator");
 
-const User = require("../../model/User");
+const User = require("../../models/User");
 
 // @route   POST api/users
 // @desc    Register User
